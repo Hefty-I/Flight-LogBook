@@ -7,6 +7,7 @@ import TxPanel from "./components/TxPanel.jsx";
 import Overview from "./pages/Overview.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import StudentPage from "./pages/StudentPage.jsx";
+import InstructorPage from "./pages/InstructorPage.jsx";
 
 /** Tabs appear only for roles the connected wallet actually holds (role-dependent UI). */
 function tabsFor(roles) {
@@ -44,9 +45,7 @@ function Shell() {
 
         {tab === "overview" && <Overview roles={roles} />}
         {tab === "student" && <StudentPage roles={roles} />}
-        {tab === "instructor" && (
-          <ComingSoon title="Sign flights" description="Co-sign your students' flights, one by one or in a batch." />
-        )}
+        {tab === "instructor" && <InstructorPage roles={roles} />}
         {tab === "school" && (
           <ComingSoon title="My school" description="Register students and aircraft." />
         )}

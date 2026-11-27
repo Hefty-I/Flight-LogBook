@@ -1,6 +1,6 @@
 import { id as keccakText } from "ethers";
 import { useFlightProof } from "../context/FlightProofContext.jsx";
-import { FLAGS, hoursMinutes, utc } from "../lib/format.js";
+import { FLAGS, hoursMinutes, shortAddress, utc } from "../lib/format.js";
 import StatusBadge from "./StatusBadge.jsx";
 import EvidenceLink from "./EvidenceLink.jsx";
 
@@ -18,8 +18,9 @@ function flightType(flags) {
  * Flights with the actions the contract allows right now, using the same time windows
  * as FlightLog (sign 7 days, oracle timeout 14 days, dispute 30 days).
  * `actions`: "student" shows dispute / timeout / close buttons.
+ * `showStudent`: adds a student column (instructor and authority views).
  */
-export default function FlightTable({ flights, actions }) {
+export default function FlightTable({ flights, actions, showStudent = false }) {
   const { runTx, chain } = useFlightProof();
   const now = chain.time ?? 0;
 
@@ -58,6 +59,7 @@ export default function FlightTable({ flights, actions }) {
         <thead>
           <tr>
             <th>#</th>
+            {showStudent && <th>Student</th>}
             <th>Departure (UTC)</th>
             <th>Aircraft</th>
             <th>Route</th>
@@ -72,6 +74,11 @@ export default function FlightTable({ flights, actions }) {
           {flights.map((f) => (
             <tr key={f.id}>
               <td>{f.id}</td>
+              {showStudent && (
+                <td className="mono" title={f.student}>
+                  {shortAddress(f.student)}
+                </td>
+              )}
               <td>{utc(f.departureTime).replace(" UTC", "")}</td>
               <td title={`ICAO24 ${f.aircraft.icao24}${f.aircraft.adsb ? " · ADS-B" : " · no ADS-B"}`}>
                 {f.aircraft.registration}

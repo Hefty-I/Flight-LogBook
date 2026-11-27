@@ -489,6 +489,24 @@ select option {
   color: var(--muted);
   border-color: var(--line);
 }
+.queue-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.wide-notice {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+input[type="checkbox"] {
+  accent-color: #f2f2f2;
+  width: 15px;
+  height: 15px;
+  padding: 0;
+}
 .row-actions .btn.small {
   margin: 0 0 0 0.4rem;
 }
