@@ -19,3 +19,7 @@ oracle/state/
 
 # Frontend build output
 frontend/dist/
+
+# Editor / AI-tool settings (personal, not part of the project)
+.claude/
+.vscode/
