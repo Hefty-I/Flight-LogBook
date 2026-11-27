@@ -102,7 +102,7 @@ Open http://localhost:5173. Without MetaMask the site is read-only; "Verify a pi
 | Oracle (live OpenSky) | ⚠️ written, unit-tested with a fake server, **not yet run against the real API** (needs an OpenSky API client) |
 | IPFS via Pinata | ⚠️ written, unit-tested with a fake server, not yet run against Pinata |
 | Demo data | ⚠️ synthetic sample; record a real flight before the final demo |
-| Gas study | ⏳ optimized contracts measured; naive baseline versions still to write (see docs) |
+| Gas study | ✅ baseline vs optimized measured side by side: [docs/GAS_RESULTS.md](docs/GAS_RESULTS.md) (`npm run gas:compare`) |
 | Website | ✅ student, instructor, school and authority pages + public verify page with evidence check; tested in a browser with a test wallet (check with real MetaMask before the demo) |
 | Sepolia deployment | ⏳ to do (`npm run deploy:sepolia` after filling `contracts/.env`) |
 

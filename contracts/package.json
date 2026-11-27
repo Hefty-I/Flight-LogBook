@@ -7,6 +7,7 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "gas": "cross-env REPORT_GAS=true hardhat test",
+    "gas:compare": "hardhat run scripts/gas-compare.ts",
     "coverage": "hardhat coverage",
     "node": "hardhat node",
     "deploy:local": "hardhat run scripts/deploy.ts --network localhost",
