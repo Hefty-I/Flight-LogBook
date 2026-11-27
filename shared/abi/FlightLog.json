@@ -1,0 +1,1410 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "admin",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "authorityRegistry",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "trainingRegistry",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [],
+    "name": "AccessControlBadConfirmation",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "neededRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "AccessControlUnauthorizedAccount",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      }
+    ],
+    "name": "AircraftBusy",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      }
+    ],
+    "name": "AircraftNotInSchool",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      }
+    ],
+    "name": "AircraftUnavailable",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "authorityId",
+        "type": "uint32"
+      }
+    ],
+    "name": "AuthorityInactive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "CrossCountryNeedsDifferentAirports",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "DisputeWindowClosed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EmptyBatch",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EnforcedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ExpectedPause",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "FlightNotFinished",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "FlightNotFound",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "instructor",
+        "type": "address"
+      }
+    ],
+    "name": "InstructorNotActive",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "instructor",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "InstructorWrongSchool",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "InvalidAirport",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "durationMinutes",
+        "type": "uint16"
+      }
+    ],
+    "name": "InvalidDuration",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "flags",
+        "type": "uint8"
+      }
+    ],
+    "name": "InvalidFlags",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "LoggedTooLate",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "MissingEvidence",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NoDataNotAllowedForTrackedAircraft",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "authorityId",
+        "type": "uint32"
+      },
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
+    ],
+    "name": "NotAuthorityAdmin",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum FlightLog.Status",
+        "name": "current",
+        "type": "uint8"
+      }
+    ],
+    "name": "NotClosable",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "NotFlightStudent",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "NotRegisteredStudent",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "OracleTimeoutNotReached",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "schoolId",
+        "type": "uint32"
+      }
+    ],
+    "name": "SchoolInactive",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "SignWindowClosed",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      }
+    ],
+    "name": "StudentBusy",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "SystemPaused",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      }
+    ],
+    "name": "TooManyInstructors",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum FlightLog.Status",
+        "name": "current",
+        "type": "uint8"
+      }
+    ],
+    "name": "WrongStatus",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroAddress",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "reasonHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "reasonURI",
+        "type": "string"
+      }
+    ],
+    "name": "DisputeOpened",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "accepted",
+        "type": "bool"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "resolver",
+        "type": "address"
+      }
+    ],
+    "name": "DisputeResolved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum FlightLog.Status",
+        "name": "previousStatus",
+        "type": "uint8"
+      }
+    ],
+    "name": "FlightClosed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "durationMinutes",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "adsbVerified",
+        "type": "bool"
+      }
+    ],
+    "name": "FlightCounted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint40",
+        "name": "departureTime",
+        "type": "uint40"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "durationMinutes",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "flags",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "departureAirport",
+        "type": "bytes4"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "arrivalAirport",
+        "type": "bytes4"
+      }
+    ],
+    "name": "FlightLogged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "instructor",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes3",
+        "name": "icao24",
+        "type": "bytes3"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "adsbEquipped",
+        "type": "bool"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint40",
+        "name": "departureTime",
+        "type": "uint40"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint16",
+        "name": "durationMinutes",
+        "type": "uint16"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "departureAirport",
+        "type": "bytes4"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes4",
+        "name": "arrivalAirport",
+        "type": "bytes4"
+      }
+    ],
+    "name": "FlightSigned",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum FlightLog.OracleResult",
+        "name": "result",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum FlightLog.Status",
+        "name": "newStatus",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "evidenceHash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "evidenceURI",
+        "type": "string"
+      }
+    ],
+    "name": "FlightVerified",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "OracleTimeoutClaimed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "previousAdminRole",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "newAdminRole",
+        "type": "bytes32"
+      }
+    ],
+    "name": "RoleAdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleGranted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      }
+    ],
+    "name": "RoleRevoked",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DEFAULT_ADMIN_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "DISPUTE_DEADLINE",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "FLAG_CROSS_COUNTRY",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "FLAG_NIGHT",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "FLAG_SOLO",
+    "outputs": [
+      {
+        "internalType": "uint8",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_DURATION_MINUTES",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_INSTRUCTORS_PER_STUDENT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "MAX_LOG_DELAY",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ORACLE_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ORACLE_TIMEOUT",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "PAUSER_ROLE",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "SIGN_WINDOW",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "day",
+        "type": "uint256"
+      }
+    ],
+    "name": "aircraftDayBitmap",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "authorities",
+    "outputs": [
+      {
+        "internalType": "contract IAuthorityRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "claimOracleTimeout",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "closeFlight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "flightCount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getFlight",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "student",
+            "type": "address"
+          },
+          {
+            "internalType": "uint32",
+            "name": "aircraftId",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint40",
+            "name": "departureTime",
+            "type": "uint40"
+          },
+          {
+            "internalType": "uint16",
+            "name": "durationMinutes",
+            "type": "uint16"
+          },
+          {
+            "internalType": "uint8",
+            "name": "flags",
+            "type": "uint8"
+          },
+          {
+            "internalType": "address",
+            "name": "instructor",
+            "type": "address"
+          },
+          {
+            "internalType": "bytes4",
+            "name": "departureAirport",
+            "type": "bytes4"
+          },
+          {
+            "internalType": "bytes4",
+            "name": "arrivalAirport",
+            "type": "bytes4"
+          },
+          {
+            "internalType": "enum FlightLog.Status",
+            "name": "status",
+            "type": "uint8"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "evidenceHash",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct FlightLog.Flight",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getRoleAdmin",
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "grantRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "hasRole",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      }
+    ],
+    "name": "instructorsOf",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint32",
+        "name": "aircraftId",
+        "type": "uint32"
+      },
+      {
+        "internalType": "uint40",
+        "name": "departureTime",
+        "type": "uint40"
+      },
+      {
+        "internalType": "uint16",
+        "name": "durationMinutes",
+        "type": "uint16"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "departureAirport",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "bytes4",
+        "name": "arrivalAirport",
+        "type": "bytes4"
+      },
+      {
+        "internalType": "uint8",
+        "name": "flags",
+        "type": "uint8"
+      }
+    ],
+    "name": "logFlight",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "instructor",
+        "type": "address"
+      }
+    ],
+    "name": "minutesWith",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "reasonHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "reasonURI",
+        "type": "string"
+      }
+    ],
+    "name": "openDispute",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "registry",
+    "outputs": [
+      {
+        "internalType": "contract ITrainingRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "callerConfirmation",
+        "type": "address"
+      }
+    ],
+    "name": "renounceRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "accept",
+        "type": "bool"
+      }
+    ],
+    "name": "resolveDispute",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "revokeRole",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      }
+    ],
+    "name": "signFlight",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "flightIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "signFlights",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "flightId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum FlightLog.OracleResult",
+        "name": "result",
+        "type": "uint8"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "evidenceHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "evidenceURI",
+        "type": "string"
+      }
+    ],
+    "name": "submitVerification",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
+    ],
+    "name": "supportsInterface",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "student",
+        "type": "address"
+      }
+    ],
+    "name": "totalsOf",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint32",
+            "name": "total",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "dual",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "solo",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "crossCountry",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "night",
+            "type": "uint32"
+          },
+          {
+            "internalType": "uint32",
+            "name": "verified",
+            "type": "uint32"
+          }
+        ],
+        "internalType": "struct IFlightLog.Totals",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]

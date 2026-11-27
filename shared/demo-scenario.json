@@ -1,0 +1,28 @@
+{
+  "note": "SYNTHETIC demo data. Before the final demo, record a real flight with `npm run record` in oracle/ and update this file to match it (see oracle/README.md).",
+  "demoStartDate": "2026-11-20T12:00:00Z",
+  "aircraft": [
+    { "icao24": "3c6444", "registration": "D-EABC", "adsbEquipped": true },
+    { "icao24": "a1b2c3", "registration": "N172SP", "adsbEquipped": false }
+  ],
+  "flights": [
+    {
+      "label": "Real training flight - matches the OpenSky record",
+      "aircraftIndex": 0,
+      "departureUtc": "2026-11-20T08:00:00Z",
+      "minutes": 90,
+      "from": "EDFE",
+      "to": "EDFZ",
+      "flags": 2
+    },
+    {
+      "label": "Ghost flight - this aircraft left no ADS-B trace at this time",
+      "aircraftIndex": 0,
+      "departureUtc": "2026-11-20T10:00:00Z",
+      "minutes": 60,
+      "from": "EDFE",
+      "to": "EDFE",
+      "flags": 0
+    }
+  ]
+}
