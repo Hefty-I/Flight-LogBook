@@ -1,0 +1,21 @@
+node_modules/
+.env
+*.env.local
+
+# Hardhat
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/
+contracts/coverage/
+contracts/coverage.json
+contracts/gas-report*.txt
+
+# Local deployments change on every restart (keep sepolia.json)
+shared/deployments/localhost.json
+shared/deployments/hardhat.json
+
+# Oracle runtime state (event cursor, local evidence copies)
+oracle/state/
+
+# Frontend build output
+frontend/dist/
