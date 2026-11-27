@@ -9,12 +9,17 @@ const LABEL = {
 
 /** Bottom-right list of recent transactions with their status (rubric: transaction feedback). */
 export default function TxPanel() {
-  const { txs } = useFlightProof();
+  const { txs, clearTxs } = useFlightProof();
   if (!txs.length) return null;
 
   return (
     <aside className="tx-panel">
-      <div className="tx-title">Recent transactions</div>
+      <div className="tx-title">
+        <span>Recent transactions</span>
+        <button className="link-btn" onClick={clearTxs} title="Hide this panel">
+          Clear ✕
+        </button>
+      </div>
       {txs.map((t) => (
         <div key={t.id} className={`tx ${t.state}`}>
           <div className="tx-row">

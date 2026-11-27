@@ -1,4 +1,26 @@
+import { Interface, isHexString } from "ethers";
+import { ABIS } from "./config.js";
 import { INELIGIBILITY } from "./format.js";
+
+// When a *transaction* fails during gas estimation, ethers reports the raw revert data
+// ("unknown custom error") because the provider does not know our ABIs. We decode it here.
+const INTERFACES = Object.values(ABIS).map((abi) => new Interface(abi));
+
+function decodeRevert(err) {
+  if (err?.revert?.name) return err.revert;
+  const candidates = [err?.data, err?.info?.error?.data, err?.info?.error?.data?.data, err?.error?.data];
+  const data = candidates.find((d) => isHexString(d) && d.length >= 10);
+  if (!data) return null;
+  for (const iface of INTERFACES) {
+    try {
+      const parsed = iface.parseError(data);
+      if (parsed) return parsed;
+    } catch {
+      // not this contract's error; try the next ABI
+    }
+  }
+  return null;
+}
 
 // Plain-language explanations of the contracts' custom errors.
 const FRIENDLY = {
@@ -64,7 +86,7 @@ export function explainError(err) {
   if (err?.code === "ACTION_REJECTED" || err?.info?.error?.code === 4001) {
     return "You rejected the request in MetaMask.";
   }
-  const revert = err?.revert;
+  const revert = decodeRevert(err);
   if (revert?.name) {
     if (revert.name === "NotEligible") {
       return `Not eligible: ${INELIGIBILITY[Number(revert.args?.[2])] ?? "requirements not met"}.`;

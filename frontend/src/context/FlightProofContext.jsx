@@ -86,7 +86,9 @@ export function FlightProofProvider({ children }) {
     [mode, deployment, provider, refresh],
   );
 
-  const value = { ...wallet, provider, deployment, mode, contracts, chain, refresh, refreshKey, runTx, txs };
+  const clearTxs = useCallback(() => setTxs([]), []);
+
+  const value = { ...wallet, provider, deployment, mode, contracts, chain, refresh, refreshKey, runTx, txs, clearTxs };
   return <FlightProofContext.Provider value={value}>{children}</FlightProofContext.Provider>;
 }
 

@@ -374,6 +374,125 @@ th {
   letter-spacing: var(--track);
 }
 
+h2.sub {
+  margin-top: 1.5rem;
+}
+
+/* ── Forms ── */
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 1rem;
+}
+.form .full {
+  grid-column: 1 / -1;
+}
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+input,
+select,
+textarea {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  font-size: 0.9rem;
+  letter-spacing: normal;
+  text-transform: none;
+  color-scheme: dark;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--line-strong);
+}
+select option {
+  background: #111;
+}
+.checks {
+  display: flex;
+  gap: 1.5rem;
+}
+.form .checks label {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: var(--soft);
+}
+.form-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* ── Progress bars ── */
+.progress-row {
+  margin-bottom: 1rem;
+}
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.82rem;
+  margin-bottom: 0.4rem;
+  color: var(--soft);
+}
+.bar {
+  height: 3px;
+  background: var(--line);
+}
+.fill {
+  height: 100%;
+  background: var(--soft);
+  transition: width 0.4s;
+}
+.fill.done {
+  background: var(--ok);
+}
+
+/* ── Flight status ── */
+.status {
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--line-strong);
+  cursor: help;
+}
+.status.ok {
+  color: var(--ok);
+  border-color: var(--ok);
+}
+.status.bad {
+  color: var(--bad);
+  border-color: var(--bad);
+}
+.status.wait {
+  color: var(--warn);
+  border-color: var(--warn);
+}
+.status.neutral {
+  color: var(--soft);
+}
+.status.muted {
+  color: var(--muted);
+  border-color: var(--line);
+}
+.row-actions .btn.small {
+  margin: 0 0 0 0.4rem;
+}
+
 /* ── Transaction panel ── */
 .tx-panel {
   position: fixed;
@@ -388,11 +507,27 @@ th {
   z-index: 30;
 }
 .tx-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.66rem;
   text-transform: uppercase;
   letter-spacing: var(--track);
   color: var(--muted);
   margin: 0 0.2rem 0.6rem;
+}
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0;
+}
+.link-btn:hover {
+  color: var(--text);
 }
 .tx {
   border-left: 2px solid var(--line);
