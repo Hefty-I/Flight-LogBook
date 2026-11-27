@@ -489,6 +489,42 @@ select option {
   color: var(--muted);
   border-color: var(--line);
 }
+h2.title {
+  font-size: 1.3rem;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+}
+.inline-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.5rem;
+}
+.inline-stats li {
+  border-bottom: none;
+  flex-direction: column;
+  gap: 0.2rem;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.inline-stats strong {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: normal;
+}
+.inline-form {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.inline-form input {
+  flex: 1 1 280px;
+}
+td.wrap {
+  white-space: normal;
+  min-width: 200px;
+}
 .queue-foot {
   display: flex;
   justify-content: space-between;

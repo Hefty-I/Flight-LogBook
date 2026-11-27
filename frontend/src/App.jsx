@@ -8,6 +8,7 @@ import Overview from "./pages/Overview.jsx";
 import ComingSoon from "./pages/ComingSoon.jsx";
 import StudentPage from "./pages/StudentPage.jsx";
 import InstructorPage from "./pages/InstructorPage.jsx";
+import AuthorityPage from "./pages/AuthorityPage.jsx";
 
 /** Tabs appear only for roles the connected wallet actually holds (role-dependent UI). */
 function tabsFor(roles) {
@@ -49,12 +50,7 @@ function Shell() {
         {tab === "school" && (
           <ComingSoon title="My school" description="Register students and aircraft." />
         )}
-        {tab === "authority" && (
-          <ComingSoon
-            title="Authority"
-            description="Register schools and instructors, resolve disputes, issue licences and decide validations."
-          />
-        )}
+        {tab === "authority" && <AuthorityPage roles={roles} />}
         {tab === "verify" && (
           <ComingSoon title="Verify a pilot" description="Anyone can check a pilot's licence and verified hours." />
         )}
