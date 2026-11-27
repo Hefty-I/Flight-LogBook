@@ -105,21 +105,12 @@ Logged ──instructor signs (≤ 7 days)──► Signed ──oracle MATCH─
 
 ### 4.1 Components
 
-```
- Student / Instructor / School / Authority (MetaMask)          Public verifier (no wallet)
-        │ transactions                    ▲ reads                         │ reads
-        ▼                                 │                               ▼
- ┌──────────────────── Ethereum (Hardhat local network; Sepolia-ready) ─────────────────────┐
- │ AuthorityRegistry ◄── TrainingRegistry ◄── FlightLog ◄── LicenceManager                   │
- └────────────────────────────────────┬─────────────────────▲─────────────────────────────────┘
-            FlightSigned event        │                     │ submitVerification(result, hash, uri)
-                                      ▼                     │
-                        ┌──────────────────── Oracle service (Node.js) ─────────────┐
-                        │ matcher ◄── OpenSky /flights/aircraft (OAuth2 or replay)  │
-                        │ evidence JSON ──► IPFS (Pinata) or local copy             │
-                        └───────────────────────────────────────────────────────────┘
- Website (React + ethers.js): one page per role + public "Verify a pilot" page with an evidence check
-```
+![Figure 1. System architecture, data flow and trust boundaries](diagrams/architecture.png)
+
+Figure 1 shows the components, the numbered flow of a flight from logging to verification, and the
+trust boundaries: users are untrusted (every action is checked on-chain), the oracle is semi-trusted
+(only `ORACLE_ROLE`, and every result carries an evidence hash), and external data is public and
+verified by hash or cross-check.
 
 ### 4.2 Technology
 
@@ -134,17 +125,7 @@ Logged ──instructor signs (≤ 7 days)──► Signed ──oracle MATCH─
 
 ### 5.1 Inheritance and composition
 
-```
-              OpenZeppelin AccessControl + Pausable
-                              │
-                     AccessBase (abstract)            roles, emergency pause, shared errors
-                              │
-         ┌────────────────────┴──────────────────────┐
-  AuthorityRegistry                          AuthorityScoped (abstract)
-  authorities, rules, voting                 "only this country's admin", system-wide pause
-                                   ┌────────────────┼──────────────────┐
-                            TrainingRegistry    FlightLog          LicenceManager
-```
+![Figure 2. Contract inheritance and interactions](diagrams/contracts.png)
 
 **Why inheritance:** every contract needs the same roles, pause switch and checks. Writing them once
 in a two-level chain (`AccessBase` → `AuthorityScoped`) avoids copy-paste bugs. Because

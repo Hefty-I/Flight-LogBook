@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <!-- UML-style hollow triangle: "inherits from" -->
+    <marker id="inherit" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="13" markerHeight="13" orient="auto">
+      <path d="M0,0 L12,6 L0,12 z" fill="#FFFFFF" stroke="#1F2A44" stroke-width="1.3"/>
+    </marker>
+    <marker id="use" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1F5FD1"/>
+    </marker>
+    <style>
+      .box { fill: #FFFFFF; stroke: #1F2A44; stroke-width: 1.6; }
+      .abstract { fill: #F5F6F8; stroke: #1F2A44; stroke-width: 1.6; stroke-dasharray: 6 4; }
+      .oz { fill: #EEF0F3; stroke: #8A93A6; stroke-width: 1.4; }
+      .title { font-size: 17px; font-weight: 700; fill: #1F2A44; }
+      .kind { font-size: 12px; font-style: italic; fill: #6B7486; }
+      .sub { font-size: 12.5px; fill: #4A5468; }
+      .inh { stroke: #1F2A44; stroke-width: 1.8; fill: none; }
+      .use { stroke: #1F5FD1; stroke-width: 1.6; fill: none; stroke-dasharray: 7 5; marker-end: url(#use); }
+      .label { font-size: 12px; fill: #1F5FD1; font-weight: 600; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="900" fill="#FFFFFF"/>
+  <text x="700" y="40" text-anchor="middle" font-size="24" font-weight="700" fill="#1F2A44">FlightProof — contract inheritance and interactions</text>
+
+  <!-- OpenZeppelin -->
+  <rect x="330" y="72" width="240" height="70" rx="8" class="oz"/>
+  <text x="345" y="100" class="title" font-size="15.5">AccessControl</text>
+  <text x="345" y="122" class="sub">OpenZeppelin v5 (reused)</text>
+  <rect x="630" y="72" width="240" height="70" rx="8" class="oz"/>
+  <text x="645" y="100" class="title" font-size="15.5">Pausable</text>
+  <text x="645" y="122" class="sub">OpenZeppelin v5 (reused)</text>
+
+  <!-- AccessBase -->
+  <rect x="440" y="200" width="320" height="82" rx="8" class="abstract"/>
+  <text x="455" y="226" class="title">AccessBase</text>
+  <text x="560" y="226" class="kind">abstract</text>
+  <text x="455" y="248" class="sub">global roles (admin, pauser), emergency</text>
+  <text x="455" y="266" class="sub">pause, shared errors</text>
+
+  <!-- level 2 -->
+  <rect x="80" y="360" width="330" height="100" rx="8" class="box"/>
+  <text x="95" y="388" class="title">AuthorityRegistry</text>
+  <text x="95" y="410" class="sub">countries and their licence rules (ICAO</text>
+  <text x="95" y="428" class="sub">40 h floor), founding + sealing, consortium</text>
+  <text x="95" y="446" class="sub">votes to add / suspend, key rotation</text>
+
+  <rect x="760" y="360" width="340" height="90" rx="8" class="abstract"/>
+  <text x="775" y="388" class="title">AuthorityScoped</text>
+  <text x="920" y="388" class="kind">abstract</text>
+  <text x="775" y="410" class="sub">"only this country's admin" check;</text>
+  <text x="775" y="428" class="sub">system-wide pause via AuthorityRegistry</text>
+
+  <!-- level 3 -->
+  <rect x="470" y="560" width="270" height="100" rx="8" class="box"/>
+  <text x="485" y="588" class="title">TrainingRegistry</text>
+  <text x="485" y="610" class="sub">schools, instructors, students,</text>
+  <text x="485" y="628" class="sub">aircraft; one wallet = one role;</text>
+  <text x="485" y="646" class="sub">separation of duties</text>
+  <rect x="795" y="560" width="270" height="100" rx="8" class="box" stroke-width="2.6"/>
+  <text x="810" y="588" class="title">FlightLog</text>
+  <text x="810" y="610" class="sub">log, co-sign (batch), oracle result,</text>
+  <text x="810" y="628" class="sub">disputes, close; slot bitmap;</text>
+  <text x="810" y="646" class="sub">running totals (IFlightLog)</text>
+  <rect x="1110" y="560" width="270" height="100" rx="8" class="box"/>
+  <text x="1125" y="588" class="title">LicenceManager</text>
+  <text x="1125" y="610" class="sub">eligibility, issue / suspend /</text>
+  <text x="1125" y="628" class="sub">revoke, review after revocation,</text>
+  <text x="1125" y="646" class="sub">cross-border validation (lazy)</text>
+
+  <!-- inheritance: AccessBase -> AccessControl, Pausable -->
+  <path d="M600 200 V172 H450" class="inh"/>
+  <path d="M450 172 L450 144" class="inh" marker-end="url(#inherit)"/>
+  <path d="M600 172 L750 172 L750 144" class="inh" marker-end="url(#inherit)"/>
+  <!-- inheritance: AuthorityRegistry, AuthorityScoped -> AccessBase -->
+  <path d="M245 360 V320 H930 V360" class="inh"/>
+  <path d="M600 320 L600 284" class="inh" marker-end="url(#inherit)"/>
+  <!-- inheritance: TrainingRegistry, FlightLog, LicenceManager -> AuthorityScoped -->
+  <path d="M605 560 V510 H1245 V560" class="inh"/>
+  <path d="M930 560 V510" class="inh"/>
+  <path d="M930 510 L930 452" class="inh" marker-end="url(#inherit)"/>
+
+  <!-- interactions (view calls) -->
+  <!-- TrainingRegistry -> AuthorityRegistry -->
+  <path d="M470 615 L300 615 L300 464" class="use"/>
+  <text x="312" y="640" class="label">isActiveAdmin · adminOf</text>
+  <!-- FlightLog -> TrainingRegistry -->
+  <path d="M900 660 L900 695 L640 695 L640 664" class="use"/>
+  <text x="652" y="714" class="label">studentSchool · instructorStatus · aircraftInfo</text>
+  <!-- LicenceManager -> FlightLog -->
+  <path d="M1245 660 L1245 695 L990 695 L990 664" class="use"/>
+  <text x="1058" y="714" class="label">totalsOf · instructorsOf · minutesWith</text>
+  <!-- FlightLog -> AuthorityRegistry -->
+  <path d="M1030 660 L1030 745 L200 745 L200 464" class="use"/>
+  <text x="212" y="738" class="label">isActive · paused (from FlightLog and TrainingRegistry)</text>
+  <!-- LicenceManager -> AuthorityRegistry -->
+  <path d="M1330 660 L1330 790 L140 790 L140 464" class="use"/>
+  <text x="152" y="783" class="label">rulesOf · isActive (from LicenceManager)</text>
+  <!-- LicenceManager -> TrainingRegistry -->
+  <path d="M1180 560 L1180 538 L700 538 L700 558" class="use"/>
+  <text x="1015" y="532" class="label">instructorStatus</text>
+
+  <!-- legend -->
+  <rect x="20" y="815" width="1360" height="70" rx="10" fill="#FAFBFC" stroke="#D5DAE3"/>
+  <path d="M45 850 H95" class="inh" marker-end="url(#inherit)"/>
+  <text x="108" y="855" font-size="13.5" fill="#1F2A44">inherits from</text>
+  <path d="M235 850 H285" class="use"/>
+  <text x="298" y="855" font-size="13.5" fill="#1F2A44">reads from (view call through an interface)</text>
+  <rect x="640" y="840" width="36" height="20" rx="4" class="abstract"/>
+  <text x="688" y="855" font-size="13.5" fill="#1F2A44">abstract (never deployed alone)</text>
+  <rect x="930" y="840" width="36" height="20" rx="4" class="oz"/>
+  <text x="978" y="855" font-size="13.5" fill="#1F2A44">reused library code</text>
+  <text x="1135" y="855" font-size="13.5" fill="#1F2A44">No contract holds or sends ETH.</text>
+</svg>

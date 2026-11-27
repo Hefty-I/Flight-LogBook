@@ -23,3 +23,6 @@ frontend/dist/
 # Editor / AI-tool settings (personal, not part of the project)
 .claude/
 .vscode/
+
+# Word lock files
+~$*

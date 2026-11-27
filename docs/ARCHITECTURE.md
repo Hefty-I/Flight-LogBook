@@ -4,6 +4,13 @@ Material for the architecture, security and gas sections of the report.
 
 ## 1. Components and data flow
 
+![System architecture, data flow and trust boundaries](diagrams/architecture.png)
+
+![Contract inheritance and interactions](diagrams/contracts.png)
+
+The diagrams are drawn as SVG in `docs/diagrams/` (the PNGs are rendered from them). A text version
+of the flow follows.
+
 ```
  Student / Instructor / School / Authority (MetaMask)
         │  transactions                          ▲ reads (status, totals, licences)
