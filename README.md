@@ -17,7 +17,7 @@ contracts/   Solidity + Hardhat: contracts, tests (66), deploy/seed/status scrip
 oracle/      Node.js service: OpenSky client, flight matcher, evidence + IPFS, tests (14)
 shared/      Deployed addresses, ABIs and the demo scenario (used by oracle and frontend)
 docs/        Architecture, data map, threat model and gas notes for the report
-frontend/    (to do) React + ethers.js + MetaMask
+frontend/    React + ethers.js + MetaMask: one page per role, plus a public "verify a pilot" page
 ```
 
 ## Contracts at a glance
@@ -85,6 +85,14 @@ cd contracts; npx hardhat run scripts/show-status.ts --network localhost
 
 To demo with a **real** flight instead of the synthetic sample, see [oracle/README.md](oracle/README.md).
 
+**Terminal 5: website** (MetaMask setup: [frontend/README.md](frontend/README.md))
+
+```powershell
+cd frontend; npm install; npm run dev
+```
+
+Open http://localhost:5173. Without MetaMask the site is read-only; "Verify a pilot" works for anyone.
+
 ## Status
 
 | Part | State |
@@ -95,7 +103,7 @@ To demo with a **real** flight instead of the synthetic sample, see [oracle/READ
 | IPFS via Pinata | ⚠️ written, unit-tested with a fake server, not yet run against Pinata |
 | Demo data | ⚠️ synthetic sample; record a real flight before the final demo |
 | Gas study | ⏳ optimized contracts measured; naive baseline versions still to write (see docs) |
-| Frontend | ⏳ to do |
+| Website | ✅ student, instructor, school and authority pages + public verify page with evidence check; tested in a browser with a test wallet (check with real MetaMask before the demo) |
 | Sepolia deployment | ⏳ to do (`npm run deploy:sepolia` after filling `contracts/.env`) |
 
 ## Measured gas (optimized version, Hardhat, optimizer 200 runs)

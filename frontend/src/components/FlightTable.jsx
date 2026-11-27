@@ -3,6 +3,7 @@ import { useFlightProof } from "../context/FlightProofContext.jsx";
 import { FLAGS, hoursMinutes, shortAddress, utc } from "../lib/format.js";
 import StatusBadge from "./StatusBadge.jsx";
 import EvidenceLink from "./EvidenceLink.jsx";
+import EvidenceCheck from "./EvidenceCheck.jsx";
 
 const DAY = 24 * 3600;
 
@@ -19,8 +20,9 @@ function flightType(flags) {
  * as FlightLog (sign 7 days, oracle timeout 14 days, dispute 30 days).
  * `actions`: "student" shows dispute / timeout / close buttons.
  * `showStudent`: adds a student column (instructor and authority views).
+ * `evidenceCheck`: shows a "Check evidence" button instead of a plain link (verify page).
  */
-export default function FlightTable({ flights, actions, showStudent = false }) {
+export default function FlightTable({ flights, actions, showStudent = false, evidenceCheck = false }) {
   const { runTx, chain } = useFlightProof();
   const now = chain.time ?? 0;
 
@@ -91,8 +93,8 @@ export default function FlightTable({ flights, actions, showStudent = false }) {
               <td>
                 <StatusBadge status={f.status} />
               </td>
-              <td>
-                <EvidenceLink evidence={f.evidence} />
+              <td className={evidenceCheck ? "wrap" : ""}>
+                {evidenceCheck ? <EvidenceCheck evidence={f.evidence} /> : <EvidenceLink evidence={f.evidence} />}
               </td>
               <td className="row-actions">
                 {buttonsFor(f).map(([label, onClick]) => (

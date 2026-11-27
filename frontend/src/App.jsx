@@ -5,10 +5,11 @@ import Header from "./components/Header.jsx";
 import NetworkNotice from "./components/NetworkNotice.jsx";
 import TxPanel from "./components/TxPanel.jsx";
 import Overview from "./pages/Overview.jsx";
-import ComingSoon from "./pages/ComingSoon.jsx";
 import StudentPage from "./pages/StudentPage.jsx";
 import InstructorPage from "./pages/InstructorPage.jsx";
+import SchoolPage from "./pages/SchoolPage.jsx";
 import AuthorityPage from "./pages/AuthorityPage.jsx";
+import VerifyPage from "./pages/VerifyPage.jsx";
 
 /** Tabs appear only for roles the connected wallet actually holds (role-dependent UI). */
 function tabsFor(roles) {
@@ -21,10 +22,13 @@ function tabsFor(roles) {
   return tabs;
 }
 
+// A shared link like ?pilot=0x... opens the public verify page directly.
+const initialTab = () => (new URLSearchParams(window.location.search).has("pilot") ? "verify" : "overview");
+
 function Shell() {
   const roles = useRoles();
   const tabs = tabsFor(roles);
-  const [tab, setTab] = useState("overview");
+  const [tab, setTab] = useState(initialTab);
 
   // If the wallet changes and loses the role of the open tab, go back to the overview.
   useEffect(() => {
@@ -47,13 +51,9 @@ function Shell() {
         {tab === "overview" && <Overview roles={roles} />}
         {tab === "student" && <StudentPage roles={roles} />}
         {tab === "instructor" && <InstructorPage roles={roles} />}
-        {tab === "school" && (
-          <ComingSoon title="My school" description="Register students and aircraft." />
-        )}
+        {tab === "school" && <SchoolPage roles={roles} />}
         {tab === "authority" && <AuthorityPage roles={roles} />}
-        {tab === "verify" && (
-          <ComingSoon title="Verify a pilot" description="Anyone can check a pilot's licence and verified hours." />
-        )}
+        {tab === "verify" && <VerifyPage />}
       </main>
       <TxPanel />
     </>

@@ -521,6 +521,23 @@ h2.title {
 .inline-form input {
   flex: 1 1 280px;
 }
+.licence-status {
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.evidence-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.82rem;
+  white-space: normal;
+}
+.wrap-text {
+  white-space: normal;
+}
 td.wrap {
   white-space: normal;
   min-width: 200px;
