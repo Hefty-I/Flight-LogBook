@@ -1,0 +1,48 @@
+{
+  "_note": "SYNTHETIC sample in the exact format of OpenSky's /flights/aircraft response. Replace it with a real recording (npm run record) before the final demo.",
+  "icao24": "3c6444",
+  "flights": [
+    {
+      "icao24": "3c6444",
+      "firstSeen": 1795102200,
+      "estDepartureAirport": "EDFZ",
+      "lastSeen": 1795106460,
+      "estArrivalAirport": "EDFE",
+      "callsign": "DEABC   ",
+      "estDepartureAirportHorizDistance": 1420,
+      "estDepartureAirportVertDistance": 115,
+      "estArrivalAirportHorizDistance": 980,
+      "estArrivalAirportVertDistance": 64,
+      "departureAirportCandidatesCount": 1,
+      "arrivalAirportCandidatesCount": 2
+    },
+    {
+      "icao24": "3c6444",
+      "firstSeen": 1795161840,
+      "estDepartureAirport": "EDFE",
+      "lastSeen": 1795166820,
+      "estArrivalAirport": "EDFZ",
+      "callsign": "DEABC   ",
+      "estDepartureAirportHorizDistance": 1210,
+      "estDepartureAirportVertDistance": 98,
+      "estArrivalAirportHorizDistance": 860,
+      "estArrivalAirportVertDistance": 52,
+      "departureAirportCandidatesCount": 1,
+      "arrivalAirportCandidatesCount": 1
+    },
+    {
+      "icao24": "3c6444",
+      "firstSeen": 1795183800,
+      "estDepartureAirport": "EDFZ",
+      "lastSeen": 1795186920,
+      "estArrivalAirport": null,
+      "callsign": "DEABC   ",
+      "estDepartureAirportHorizDistance": 1330,
+      "estDepartureAirportVertDistance": 120,
+      "estArrivalAirportHorizDistance": null,
+      "estArrivalAirportVertDistance": null,
+      "departureAirportCandidatesCount": 1,
+      "arrivalAirportCandidatesCount": 0
+    }
+  ]
+}
